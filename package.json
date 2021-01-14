@@ -7,7 +7,7 @@
   "scripts": {
     "start": "lerna run start --parallel",
     "lint": "yarn lint:prettier",
-    "lint:prettier": "prettier --check {**/*,*}.{js,ts,tsx,json,yml,md,mdx} --ignore-path ./.gitignore"
+    "lint:prettier": "prettier --check {**/*,*}.{js,ts,tsx,json,yml,md,mdx}"
   },
   "lint-staged": {
     "*.{js,ts,tsx,json,yml,md,mdx}": [
