@@ -4,7 +4,25 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "lint": "yarn lint:prettier",
+    "lint:prettier": "prettier --check {**/*,*}.{js,ts,tsx,json,yml,md,mdx} --ignore-path ./.gitignore"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx,json,yml,md,mdx}": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn lint"
+    }
+  },
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "husky": "^4.3.7",
+    "lerna": "^3.22.1",
+    "lint-staged": "^10.5.3",
+    "prettier": "^2.2.1"
   }
 }
