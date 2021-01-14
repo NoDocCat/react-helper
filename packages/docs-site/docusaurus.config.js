@@ -1,7 +1,7 @@
 module.exports = {
   title: "react-helper",
   tagline: "React 开发辅助工具集",
-  url: "https://nodoccat.github.io/react-helper/",
+  url: "https://nodoccat.github.io",
   baseUrl: "/react-helper/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
