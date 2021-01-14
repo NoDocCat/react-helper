@@ -1,22 +1,10 @@
 {
-  "name": "@ndct/react-helper",
-  "version": "0.0.1",
-  "description": "React 开发辅助工具集",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NoDocCat/react-helper.git"
-  },
-  "keywords": [
-    "react",
-    "react-hooks"
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/*"
   ],
-  "author": {
-    "name": "NoDocCat",
-    "email": "nodoccat@outlook.com"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/NoDocCat/react-helper/issues"
-  },
-  "homepage": "https://github.com/NoDocCat/react-helper#readme"
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  }
 }
