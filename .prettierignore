@@ -2,3 +2,4 @@
 node_modules
 packages/docs-site/.docusaurus
 packages/docs-site/build
+packages/react-helper/dist
