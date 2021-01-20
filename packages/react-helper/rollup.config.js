@@ -1,7 +1,8 @@
 import typescript from "@rollup/plugin-typescript";
 import { terser } from "rollup-plugin-terser";
+import cleaner from "rollup-plugin-cleaner";
 
-const plugins = [typescript()];
+const plugins = [typescript(), cleaner({ targets: ["./dist/"] })];
 
 // 构建模式执行压缩
 if (!process.env.ROLLUP_WATCH) {
