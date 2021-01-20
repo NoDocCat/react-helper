@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface BatteryState {
   isSupport: boolean; // 当前环境是否支持电池 API
@@ -36,7 +36,7 @@ type NavigatorWithBattery = Navigator & {
  */
 export function useBattery(): BatteryState {
   const isSupport = navigator && "getBattery" in navigator;
-  const batteryManager = useRef<BatteryManager | null>(null);
+  const [batteryManager, setBatteryManager] = useState<BatteryManager | null>(null);
 
   const [state, setState] = useState<BatteryState>({
     isSupport: isSupport,
@@ -60,28 +60,34 @@ export function useBattery(): BatteryState {
   useEffect(() => {
     if (!isSupport) return;
 
+    // todo: 这是防止内存泄露的临时做法, 后期考虑尝试使用 Generator 解决这个问题
+    let isCancelled = false;
+
     (navigator as NavigatorWithBattery).getBattery().then(manager => {
+      if (isCancelled) return;
       listener({ type: "chargingchange", target: manager });
-      batteryManager.current = manager;
+      setBatteryManager(manager);
     });
+
+    return () => {
+      isCancelled = true;
+    };
   }, []);
 
   // 注册事件
   useEffect(() => {
-    if (!batteryManager.current) return;
+    if (!batteryManager) return;
 
-    const manager: BatteryManager = batteryManager.current;
-
-    manager.addEventListener("chargingchange", listener, false);
-    manager.addEventListener("chargingtimechange", listener, false);
-    manager.addEventListener("dischargingtimechange", listener, false);
-    manager.addEventListener("levelchange", listener, false);
+    batteryManager.addEventListener("chargingchange", listener, false);
+    batteryManager.addEventListener("chargingtimechange", listener, false);
+    batteryManager.addEventListener("dischargingtimechange", listener, false);
+    batteryManager.addEventListener("levelchange", listener, false);
 
     return () => {
-      manager.removeEventListener("chargingchange", listener, false);
-      manager.removeEventListener("chargingtimechange", listener, false);
-      manager.removeEventListener("dischargingtimechange", listener, false);
-      manager.removeEventListener("levelchange", listener, false);
+      batteryManager.removeEventListener("chargingchange", listener, false);
+      batteryManager.removeEventListener("chargingtimechange", listener, false);
+      batteryManager.removeEventListener("dischargingtimechange", listener, false);
+      batteryManager.removeEventListener("levelchange", listener, false);
     };
   }, [batteryManager]);
 
