@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/NoDocCat/react-helper/issues"
   },
-  "homepage": "https://github.com/NoDocCat/react-helper#readme"
+  "homepage": "https://github.com/NoDocCat/react-helper#readme",
+  "devDependencies": {
+    "typescript": "^4.1.3"
+  }
 }
