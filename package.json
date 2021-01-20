@@ -5,6 +5,7 @@
     "packages/*"
   ],
   "scripts": {
+    "start": "lerna run start --parallel",
     "lint": "yarn lint:prettier",
     "lint:prettier": "prettier --check {**/*,*}.{js,ts,tsx,json,yml,md,mdx}"
   },
