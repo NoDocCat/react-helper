@@ -1,1 +1,1 @@
-export { useBattery } from "./hooks/useBattery";
+export * from "./hooks/useBattery";
