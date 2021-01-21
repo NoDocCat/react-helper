@@ -35,7 +35,7 @@ type NavigatorWithBattery = Navigator & {
  * 使用设备电池状态
  */
 export function useBattery(): BatteryState {
-  const isSupport = navigator && "getBattery" in navigator;
+  const isSupport = typeof navigator !== "undefined" && "getBattery" in navigator;
   const [batteryManager, setBatteryManager] = useState<BatteryManager | null>(null);
 
   const [state, setState] = useState<BatteryState>({

@@ -6,6 +6,8 @@
   ],
   "scripts": {
     "start": "lerna run start --parallel",
+    "build": "lerna run build --parallel --scope @ndct/react-helper",
+    "docs:deploy": "yarn build && lerna run deploy --scope docs-site",
     "lint": "yarn lint:prettier && yarn lint:eslint",
     "lint:prettier": "prettier --check {**/*,*}.{js,ts,tsx,json,yml,md,mdx}",
     "lint:eslint": "eslint {**/*,*}.{js,ts,tsx}"
