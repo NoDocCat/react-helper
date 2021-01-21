@@ -1,7 +1,7 @@
 import React from "react";
 import { useBattery } from "@ndct/react-helper";
 
-export const UseBatteryDemo = () => {
+export const UseBatteryDemo: React.FC = () => {
   const state = useBattery();
 
   return (
