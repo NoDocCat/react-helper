@@ -8,6 +8,7 @@
   "scripts": {
     "start": "lerna run start --parallel",
     "build": "lerna run build --parallel --scope @ndct/react-helper",
+    "release": "yarn lint && yarn build && lerna version",
     "docs:deploy": "yarn build && lerna run deploy --scope docs-site",
     "lint": "yarn lint:prettier && yarn lint:eslint",
     "lint:prettier": "prettier --check {**/*,*}.{js,ts,tsx,json,yml,md,mdx}",
