@@ -4,25 +4,9 @@ import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
-import styles from "./styles.module.css";
+import styles from "./index.module.css";
 
-const features = [
-  {
-    title: "简化开发",
-    imageUrl: "img/undraw_docusaurus_mountain.svg",
-    description: "解决 react 开发中的常见问题",
-  },
-  {
-    title: "高可用",
-    imageUrl: "img/undraw_docusaurus_tree.svg",
-    description: "测试先行的开发方式, 每个工具都有完善的测试",
-  },
-  {
-    title: "保持最新",
-    imageUrl: "img/undraw_docusaurus_react.svg",
-    description: "保持对 react 最新版本的兼容性",
-  },
-];
+const features = [];
 
 function Feature({ imageUrl, title, description }) {
   const imgUrl = useBaseUrl(imageUrl);

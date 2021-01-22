@@ -5,7 +5,7 @@ module.exports = {
   baseUrl: "/react-helper/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
-  favicon: "img/favicon.ico",
+  favicon: "favicon.ico",
   organizationName: "NoDocCat",
   projectName: "react-helper",
   themeConfig: {
@@ -19,7 +19,7 @@ module.exports = {
     footer: {
       style: "dark",
       links: [],
-      copyright: `Copyright © 2021 NoDocCat, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © 2020 NoDocCat, Inc. Built with Docusaurus.`,
     },
   },
   presets: [
@@ -30,7 +30,8 @@ module.exports = {
           sidebarPath: require.resolve("./sidebars.js"),
           editUrl: "https://github.com/nodoccat/react-helper/edit/master/packages/docs-site",
         },
-        theme: { customCss: require.resolve("./src/css/custom.css") },
+        pages: { path: "./pages" },
+        theme: { customCss: require.resolve("./pages/style.css") },
       },
     ],
   ],

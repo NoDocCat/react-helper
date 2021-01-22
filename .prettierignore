@@ -1,5 +1,4 @@
 # Created by .ignore support plugin (hsz.mobi)
-node_modules
-packages/docs-site/.docusaurus
-packages/docs-site/build
-packages/react-helper/dist
+docs/.docusaurus
+docs/build
+project/dist
