@@ -9,6 +9,13 @@
     "start": "rollup -c -w",
     "build": "rollup -c --failAfterWarnings"
   },
+  "files": [
+    "dist",
+    "src",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NoDocCat/react-helper.git"
