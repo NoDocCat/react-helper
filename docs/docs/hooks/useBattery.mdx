@@ -1,9 +1,4 @@
----
-id: useBattery
-title: useBattery
----
-
-import CodeBlock from "@theme/CodeBlock";
+import { DemoWrapper } from "../../components/DemoWrapper";
 import { UseBatteryDemo } from "./demo/UseBatteryDemo";
 import UseBatteryDemoSource from "!!raw-loader!./demo/UseBatteryDemo";
 
@@ -16,8 +11,9 @@ import UseBatteryDemoSource from "!!raw-loader!./demo/UseBatteryDemo";
 
 ## 示例
 
-<UseBatteryDemo />
-<CodeBlock className="language-tsx" children={UseBatteryDemoSource} />
+<DemoWrapper source={UseBatteryDemoSource} type="tsx">
+  <UseBatteryDemo />
+</DemoWrapper>
 
 ## API
 
