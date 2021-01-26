@@ -34,3 +34,7 @@ table {
   padding: 16px;
   margin-bottom: 8px;
 }
+
+.demo_wrapper button + button {
+  margin-left: 8px;
+}
