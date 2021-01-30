@@ -7,12 +7,12 @@
   ],
   "scripts": {
     "start": "lerna run start --parallel",
-    "build": "yarn workspace @ndct/react-helper build",
-    "release": "yarn lint && yarn build && lerna version",
-    "docs:deploy": "yarn build && yarn workspace docs deploy",
+    "build": "lerna run build --parallel",
     "lint": "yarn lint:prettier && yarn lint:eslint",
     "lint:prettier": "prettier --check {**/*,*}.{js,ts,tsx,json,yml,md,mdx}",
-    "lint:eslint": "eslint {**/*,*}.{js,ts,tsx} --ignore-path ./.prettierignore"
+    "lint:eslint": "eslint {**/*,*}.{js,ts,tsx} --ignore-path ./.prettierignore",
+    "pub": "yarn build && lerna publish",
+    "pub:docs": "yarn build && lerna run deploy --scope docs"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
