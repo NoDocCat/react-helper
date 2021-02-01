@@ -1,5 +1,4 @@
-import { RefObject, useEffect, useMemo, useRef } from "react";
-import { useBool } from "./useBool";
+import { RefObject, useEffect, useMemo, useRef, useState } from "react";
 
 /**
  * 使用元素 hover 状态
@@ -7,7 +6,7 @@ import { useBool } from "./useBool";
  * @param delay 延时防抖
  */
 export function useHover(ref: RefObject<HTMLElement | null>, delay?: number): boolean {
-  const [state, toggle] = useBool(false);
+  const [state, toggle] = useState<boolean>(false);
   const timer = useRef<number | null>(null);
 
   const handleEnter = useMemo(() => {
@@ -36,15 +35,16 @@ export function useHover(ref: RefObject<HTMLElement | null>, delay?: number): bo
 
   useEffect(() => {
     if (!ref.current) return;
-    ref.current.addEventListener("mouseenter", handleEnter, false);
-    ref.current.addEventListener("mouseleave", handleLeave, false);
+    const target = ref.current;
+
+    target.addEventListener("mouseenter", handleEnter, false);
+    target.addEventListener("mouseleave", handleLeave, false);
 
     return () => {
-      if (!ref.current) return;
-      ref.current.removeEventListener("mouseenter", handleEnter, false);
-      ref.current.removeEventListener("mouseleave", handleLeave, false);
+      target.removeEventListener("mouseenter", handleEnter, false);
+      target.removeEventListener("mouseleave", handleLeave, false);
     };
-  }, [ref]);
+  }, [handleEnter, handleLeave, ref]);
 
   return state;
 }

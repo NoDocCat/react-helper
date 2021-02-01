@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export interface BatteryState {
   isSupport: boolean; // 当前环境是否支持电池 API
@@ -46,15 +46,18 @@ export function useBattery(): BatteryState {
     level: 0,
   });
 
-  const listener = (event: BatteryEvent) => {
-    setState({
-      isSupport: isSupport,
-      charging: event.target.charging,
-      chargingTime: event.target.chargingTime,
-      dischargingTime: event.target.dischargingTime,
-      level: event.target.level,
-    });
-  };
+  const listener = useCallback(
+    (event: BatteryEvent) => {
+      setState({
+        isSupport: isSupport,
+        charging: event.target.charging,
+        chargingTime: event.target.chargingTime,
+        dischargingTime: event.target.dischargingTime,
+        level: event.target.level,
+      });
+    },
+    [isSupport]
+  );
 
   // 初始化状态
   useEffect(() => {
@@ -72,7 +75,7 @@ export function useBattery(): BatteryState {
     return () => {
       isCancelled = true;
     };
-  }, []);
+  }, [isSupport, listener]);
 
   // 注册事件
   useEffect(() => {
@@ -89,7 +92,7 @@ export function useBattery(): BatteryState {
       batteryManager.removeEventListener("dischargingtimechange", listener, false);
       batteryManager.removeEventListener("levelchange", listener, false);
     };
-  }, [batteryManager]);
+  }, [batteryManager, listener]);
 
   return state;
 }
