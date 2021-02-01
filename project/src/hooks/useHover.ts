@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useMemo, useRef, useState } from "react";
+import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 
 /**
  * 使用元素 hover 状态
@@ -6,45 +6,46 @@ import { RefObject, useEffect, useMemo, useRef, useState } from "react";
  * @param delay 延时防抖
  */
 export function useHover(ref: RefObject<HTMLElement | null>, delay?: number): boolean {
-  const [state, toggle] = useState<boolean>(false);
+  const [state, setState] = useState<boolean>(false);
   const timer = useRef<number | null>(null);
 
-  const handleEnter = useMemo(() => {
-    if (delay) {
-      return () => {
-        timer.current = window.setTimeout(() => {
-          toggle(true);
-          if (timer.current) window.clearTimeout(timer.current);
-        }, delay);
-      };
-    } else {
-      return () => toggle(true);
+  const cleanTimer = () => {
+    if (!timer.current) return;
+    window.clearTimeout(timer.current);
+    timer.current = null;
+  };
+
+  const enterListener = useCallback(() => {
+    cleanTimer();
+
+    if (!delay) {
+      setState(true);
+      return;
     }
+
+    timer.current = window.setTimeout(() => {
+      setState(true);
+      cleanTimer();
+    }, delay);
   }, [delay]);
 
-  const handleLeave = useMemo(() => {
-    if (delay) {
-      return () => {
-        if (timer.current) window.clearTimeout(timer.current);
-        toggle(false);
-      };
-    } else {
-      return () => toggle(false);
-    }
-  }, [delay]);
+  const leaveListener = useCallback(() => {
+    cleanTimer();
+    setState(false);
+  }, []);
 
   useEffect(() => {
     if (!ref.current) return;
     const target = ref.current;
 
-    target.addEventListener("mouseenter", handleEnter, false);
-    target.addEventListener("mouseleave", handleLeave, false);
+    target.addEventListener("mouseenter", enterListener, false);
+    target.addEventListener("mouseleave", leaveListener, false);
 
     return () => {
-      target.removeEventListener("mouseenter", handleEnter, false);
-      target.removeEventListener("mouseleave", handleLeave, false);
+      target.removeEventListener("mouseenter", enterListener, false);
+      target.removeEventListener("mouseleave", leaveListener, false);
     };
-  }, [handleEnter, handleLeave, ref]);
+  }, [enterListener, leaveListener, ref]);
 
   return state;
 }
