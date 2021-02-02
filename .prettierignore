@@ -2,3 +2,4 @@
 site/.docusaurus
 site/build
 project/dist
+project/coverage
