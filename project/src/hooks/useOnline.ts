@@ -7,9 +7,12 @@ import { useCallback, useEffect } from "react";
 export function useOnline(): boolean {
   const [state, toggle] = useBool(navigator.onLine);
 
-  const listener = useCallback(() => {
-    toggle(navigator.onLine);
-  }, [toggle]);
+  const listener = useCallback(
+    (event: Event) => {
+      toggle(event.type === "online");
+    },
+    [toggle]
+  );
 
   useEffect(() => {
     window.addEventListener("online", listener, false);
