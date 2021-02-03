@@ -4,7 +4,7 @@ import cleaner from "rollup-plugin-cleaner";
 
 const plugins = [
   typescript({
-    exclude: ["**/*.d.ts", "**/*.spec.ts"],
+    exclude: ["**/*.d.ts", "**/*.spec.ts", "**/*.spec.tsx"],
   }),
 ];
 
