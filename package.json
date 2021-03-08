@@ -9,20 +9,16 @@
     "start": "lerna run start --parallel",
     "build": "lerna run build --parallel",
     "test": "yarn workspace @ndct/react-helper run test",
-    "lint": "yarn lint:prettier && yarn lint:eslint",
-    "lint:prettier": "prettier --check {**/*,*}.{js,ts,tsx,json,yml,md,mdx}",
-    "lint:eslint": "eslint {**/*,*}.{js,ts,tsx} --ignore-path ./.prettierignore",
+    "lint": "prettier -c -u . && eslint .",
     "pub": "yarn build && lerna publish",
     "pub:docs": "yarn build && lerna run deploy --scope site",
     "postinstall": "husky install"
   },
   "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "prettier --write",
+    "**/*": "prettier -w -u",
+    "*.{js,jsx,ts,tsx}": [
+      "prettier -w -u",
       "eslint --fix"
-    ],
-    "*.{json,yml,md,mdx}": [
-      "prettier --write"
     ]
   },
   "devDependencies": {
