@@ -27,7 +27,7 @@ module.exports = {
       "@docusaurus/preset-classic",
       {
         docs: {
-          path: "../docs",
+          path: "./docs",
           sidebarPath: require.resolve("./sidebars.js"),
           editUrl: "https://github.com/nodoccat/react-helper/edit/master/docs",
         },
