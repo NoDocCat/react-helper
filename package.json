@@ -6,12 +6,10 @@
     "site"
   ],
   "scripts": {
-    "start": "lerna run start --parallel",
-    "build": "lerna run build --parallel",
-    "test": "yarn workspace @ndct/react-helper run test",
+    "start": "yarn workspaces foreach -pi run start",
+    "build": "yarn workspaces foreach run build",
+    "test": "yarn workspaces foreach run test",
     "lint": "prettier -c -u . && eslint .",
-    "pub": "yarn build && lerna publish",
-    "pub:docs": "yarn build && lerna run deploy --scope site",
     "postinstall": "husky install"
   },
   "lint-staged": {
@@ -29,7 +27,6 @@
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^5.0.9",
-    "lerna": "^3.22.1",
     "lint-staged": "^10.5.3",
     "prettier": "^2.2.1"
   }
