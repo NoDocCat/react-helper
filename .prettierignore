@@ -3,5 +3,5 @@
 coverage
 dist
 .yarn
-site/.docusaurus
-site/build
+docs/.docusaurus
+docs/build

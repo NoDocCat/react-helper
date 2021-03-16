@@ -3,8 +3,6 @@ module.exports = {
   tagline: "React 开发辅助工具集",
   url: "https://nodoccat.github.io",
   baseUrl: "/react-helper/",
-  onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
   favicon: "favicon.ico",
   organizationName: "NoDocCat",
   projectName: "react-helper",
@@ -19,18 +17,14 @@ module.exports = {
     footer: {
       style: "dark",
       links: [],
-      copyright: `Copyright © 2020 NoDocCat, Inc. Built with Docusaurus.`,
+      copyright: "Copyright © 2020 NoDocCat. Built with Docusaurus.",
     },
   },
   presets: [
     [
       "@docusaurus/preset-classic",
       {
-        docs: {
-          path: "./docs",
-          sidebarPath: require.resolve("./sidebars.js"),
-          editUrl: "https://github.com/nodoccat/react-helper/edit/master/docs",
-        },
+        docs: { sidebarPath: require.resolve("./sidebars.js") },
         pages: { path: "./pages" },
         theme: { customCss: require.resolve("./pages/style.css") },
       },

@@ -2,8 +2,8 @@
   "name": "root",
   "private": true,
   "workspaces": [
-    "project",
-    "site"
+    "docs",
+    "project"
   ],
   "scripts": {
     "start": "yarn workspaces foreach -pi run start",
