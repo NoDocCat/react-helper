@@ -1,0 +1,29 @@
+.header {
+  background: #3e4053;
+  padding: 48px;
+  text-align: center;
+  --ifm-button-size-multiplier: 1.6;
+}
+
+.header h1 {
+  color: #ffffff;
+  font-size: 60px;
+}
+
+.header h2 {
+  color: #4bc2a1;
+  font-size: 28px;
+  margin-bottom: 24px;
+}
+
+.main {
+  padding: 72px 0;
+  overflow: hidden;
+  text-align: center;
+}
+
+.feature img {
+  max-width: 60%;
+  max-height: 128px;
+  margin: 0 auto;
+}
