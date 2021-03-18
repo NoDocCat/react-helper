@@ -11,8 +11,6 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "prettier",
-    "prettier/@typescript-eslint",
-    "prettier/react",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -25,15 +23,6 @@ module.exports = {
     react: { version: "detect" },
   },
   rules: {
-    "@typescript-eslint/explicit-module-boundary-types": "off",
     "react/prop-types": "off",
   },
-  overrides: [
-    {
-      files: ["*.ts", "*.tsx"],
-      rules: {
-        "@typescript-eslint/explicit-module-boundary-types": ["error"],
-      },
-    },
-  ],
 };
