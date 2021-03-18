@@ -9,6 +9,8 @@
     "start": "yarn workspaces foreach -pi run start",
     "build": "yarn workspaces foreach run build",
     "test": "yarn workspaces foreach run test",
+    "deploy-docs": "yarn run build && yarn workspace docs run deploy",
+    "publish-pkg": "yarn run build && yarn workspaces foreach --no-private npm publish",
     "lint": "prettier -c -u . && eslint .",
     "postinstall": "husky install"
   },
