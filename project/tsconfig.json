@@ -8,7 +8,6 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "noImplicitReturns": true,
-    "rootDir": "./src",
     "sourceMap": true,
     "strict": true,
     "target": "ES5"

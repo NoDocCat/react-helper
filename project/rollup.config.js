@@ -1,26 +1,16 @@
-import typescript from "@rollup/plugin-typescript";
-import { terser } from "rollup-plugin-terser";
-import cleaner from "rollup-plugin-cleaner";
-
-const plugins = [
-  typescript({
-    exclude: ["**/*.d.ts", "**/*.spec.ts", "**/*.spec.tsx"],
-  }),
-];
-
-// 构建模式执行压缩
-if (!process.env.ROLLUP_WATCH) {
-  plugins.push(terser());
-  plugins.push(cleaner({ targets: ["./dist/"] }));
-}
+import typescript from "rollup-plugin-typescript2";
+import pkg from "./package.json";
 
 export default {
   input: "./src/index.ts",
-  output: {
-    dir: "./dist",
-    format: "es",
-    sourcemap: true,
-  },
+  output: { file: pkg.module, format: "es", sourcemap: true },
   external: ["react"],
-  plugins,
+  plugins: [
+    typescript({
+      useTsconfigDeclarationDir: true,
+      tsconfigOverride: {
+        exclude: ["node_modules", "dist", "**/*.spec.ts", "**/*.spec.tsx"],
+      },
+    }),
+  ],
 };
