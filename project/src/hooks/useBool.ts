@@ -3,6 +3,7 @@ import { useCallback, useState } from "react";
 /**
  * 使用一个布尔状态
  * @param init 状态初始值
+ * @deprecated
  */
 export function useBool(init: boolean): [boolean, (value?: boolean) => void] {
   const [state, setState] = useState<boolean>(init);
