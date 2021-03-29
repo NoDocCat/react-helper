@@ -1,3 +1,5 @@
+@import "~antd/dist/antd.css";
+
 :root {
   --ifm-color-primary: #25c2a0;
   --ifm-color-primary-dark: rgb(33, 175, 144);
@@ -18,4 +20,8 @@
 
 table {
   display: table;
+}
+
+body {
+  font-size: 16px;
 }
