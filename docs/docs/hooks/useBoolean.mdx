@@ -1,0 +1,24 @@
+使用 Boolean 状态
+
+## 函数签名
+
+```typescript
+useBoolean(initState: boolean): [boolean, Dispatch]
+```
+
+## API
+
+### Params
+
+| Name      | Type    | Desc     |
+| :-------- | :------ | :------- |
+| initState | boolean | 初始状态 |
+
+### Result
+
+| Name      | Type                      | Desc                                                                    |
+| :-------- | :------------------------ | :---------------------------------------------------------------------- |
+| result[0] | boolean                   | 当前状态                                                                |
+| result[1] | (value?: boolean) => void | 状态更改函数, 用于切换状态. 也可以传入一个 boolean 值来切换到指定的状态 |
+
+## 示例
