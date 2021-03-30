@@ -4,24 +4,14 @@ import Link from "@docusaurus/Link";
 import styles from "./index.module.css";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
-import useThemeContext from "@theme/hooks/useThemeContext";
 
-const Feature: React.FC<{
-  title: string;
-  imageName: string;
-  desc: string;
-}> = ({ title, imageName, desc }) => {
-  const { isDarkTheme } = useThemeContext();
-  const fileName = `${imageName}_${isDarkTheme ? "dark" : "light"}.svg`;
-
-  return (
-    <div className={`col col--4 ${styles.feature}`}>
-      <img src={`./features/${fileName}`} alt="" />
-      <h3>{title}</h3>
-      <p>{desc}</p>
-    </div>
-  );
-};
+const Feature: React.FC<{ title: string; imageName: string; desc: string }> = props => (
+  <div className={`col col--4 ${styles.feature}`}>
+    <img src={`./features/${props.imageName}.svg`} alt="" />
+    <h3>{props.title}</h3>
+    <p>{props.desc}</p>
+  </div>
+);
 
 const Home: React.FC = () => {
   const { siteConfig = {} } = useDocusaurusContext();

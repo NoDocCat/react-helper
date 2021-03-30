@@ -7,6 +7,11 @@ module.exports = {
   organizationName: "NoDocCat",
   projectName: "react-helper",
   themeConfig: {
+    colorMode: {
+      defaultMode: "light",
+      disableSwitch: true,
+      respectPrefersColorScheme: false,
+    },
     navbar: {
       title: "react-helper",
       items: [
