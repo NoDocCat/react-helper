@@ -1,3 +1,7 @@
+import { DemoBox } from "../../components/DemoBox";
+import { UseBooleanDemo } from "./demo/UseBooleanDemo";
+import UseBooleanDemoSource from "!!raw-loader!./demo/UseBooleanDemo";
+
 使用 Boolean 状态
 
 ## 函数签名
@@ -5,6 +9,12 @@
 ```typescript
 useBoolean(initState: boolean): [boolean, Dispatch]
 ```
+
+## 示例
+
+<DemoBox source={UseBooleanDemoSource} type="tsx">
+  <UseBooleanDemo />
+</DemoBox>
 
 ## API
 
@@ -20,5 +30,3 @@ useBoolean(initState: boolean): [boolean, Dispatch]
 | :-------- | :------------------------ | :---------------------------------------------------------------------- |
 | result[0] | boolean                   | 当前状态                                                                |
 | result[1] | (value?: boolean) => void | 状态更改函数, 用于切换状态. 也可以传入一个 boolean 值来切换到指定的状态 |
-
-## 示例
