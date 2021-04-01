@@ -1,26 +1,26 @@
-/**
- * 使用设备在线状态
- */
-import { useBool } from "./useBool";
 import { useCallback, useEffect } from "react";
+import { useBoolean } from "./useBoolean";
 
+/**
+ * 使用浏览器联网状态
+ */
 export function useOnline(): boolean {
-  const [state, toggle] = useBool(navigator.onLine);
+  const [state, dispatch] = useBoolean(navigator.onLine);
 
-  const listener = useCallback(
-    (event: Event) => {
-      toggle(event.type === "online");
+  const listener = useCallback<EventListener>(
+    evt => {
+      dispatch(evt.type === "online");
     },
-    [toggle]
+    [dispatch]
   );
 
   useEffect(() => {
-    window.addEventListener("online", listener, false);
-    window.addEventListener("offline", listener, false);
+    window.addEventListener("online", listener);
+    window.addEventListener("offline", listener);
 
     return () => {
-      window.removeEventListener("online", listener, false);
-      window.removeEventListener("offline", listener, false);
+      window.removeEventListener("online", listener);
+      window.removeEventListener("offline", listener);
     };
   }, [listener]);
 
