@@ -1,0 +1,29 @@
+import { DemoBox } from "../../components/DemoBox";
+import { UseOnlineDemo } from "./demo/UseOnlineDemo";
+import UseOnlineDemoSource from "!!raw-loader!./demo/UseOnlineDemo";
+
+使用浏览器联网状态
+
+## 函数签名
+
+```typescript
+useOnline(): boolean
+```
+
+## 示例
+
+<DemoBox source={UseOnlineDemoSource} type="tsx">
+  <UseOnlineDemo />
+</DemoBox>
+
+:::note
+可通过开发者工具的网络面板使浏览器离线
+:::
+
+## API
+
+### Result
+
+| Name   | Type    | Desc               |
+| :----- | :------ | :----------------- |
+| result | boolean | 当前浏览器联网状态 |

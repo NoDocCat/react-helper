@@ -5,7 +5,7 @@ module.exports = {
       type: "category",
       label: "hooks",
       collapsed: false,
-      items: ["hooks/useBoolean"],
+      items: ["hooks/useBoolean", "hooks/useOnline"],
     },
   ],
 };
