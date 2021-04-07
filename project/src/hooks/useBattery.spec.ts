@@ -1,46 +1,47 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { useBattery } from "./useBattery";
+import { BatteryMock } from "jest-battery-mock";
 
 describe("hooks/useBattery", () => {
-  it("not support", () => {
-    // todo: 此处需要寻找一个方法明确隐藏 navigator.getBattery, 以防止 jsdom 后续更新加入相关 api 模拟导致测试失败
+  afterEach(() => BatteryMock.clean());
+
+  test("API 不支持时返回预设状态", () => {
+    BatteryMock.clean();
     const { result } = renderHook(() => useBattery());
-    expect(result.current.isSupport).toBeFalsy();
+
+    expect(result.current.charging).toBe(true);
+    expect(result.current.chargingTime).toBe(0);
+    expect(result.current.dischargingTime).toBe(Infinity);
+    expect(result.current.level).toBe(1);
   });
 
-  it("default state get", async () => {
-    // mock
-    const state = {
-      charging: true,
-      chargingTime: 20,
-      dischargingTime: Infinity,
-      level: 99,
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-    };
-
-    Object.defineProperty(navigator, "getBattery", {
-      get: () => () => Promise.resolve(state),
-      configurable: true,
-    });
+  test("初始状态获取", async () => {
+    BatteryMock.mock();
+    BatteryMock.dispatch("levelchange", { level: 0.5, charging: false });
 
     const { result, waitForNextUpdate } = renderHook(() => useBattery());
-    expect(result.current.isSupport).toBeTruthy();
+    await waitForNextUpdate();
+
+    expect(result.current.charging).toBe(false);
+    expect(result.current.chargingTime).toBe(0);
+    expect(result.current.dischargingTime).toBe(Infinity);
+    expect(result.current.level).toBe(0.5);
+  });
+
+  test("变更事件处理", async () => {
+    BatteryMock.mock();
+    const { result, waitForNextUpdate } = renderHook(() => useBattery());
+
+    BatteryMock.dispatch("chargingchange", { charging: false });
+    BatteryMock.dispatch("chargingtimechange", { chargingTime: Infinity });
+    BatteryMock.dispatch("dischargingtimechange", { dischargingTime: 9999 });
+    BatteryMock.dispatch("levelchange", { level: 0.7 });
 
     await waitForNextUpdate();
 
-    expect(result.current.charging).toBe(state.charging);
-    expect(result.current.chargingTime).toBe(state.chargingTime);
-    expect(result.current.dischargingTime).toBe(state.dischargingTime);
-    expect(result.current.level).toBe(state.level);
-
-    // clean mock
-    if ("getBattery" in navigator) {
-      delete navigator["getBattery"];
-    }
-  });
-
-  it("event test", () => {
-    // todo: 寻找模拟事件的方法
+    expect(result.current.charging).toBe(false);
+    expect(result.current.chargingTime).toBe(Infinity);
+    expect(result.current.dischargingTime).toBe(9999);
+    expect(result.current.level).toBe(0.7);
   });
 });

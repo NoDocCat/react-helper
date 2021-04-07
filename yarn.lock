@@ -3536,6 +3536,7 @@ __metadata:
     "@types/jest": ^26.0.21
     "@types/react": ^17.0.3
     jest: ^26.6.3
+    jest-battery-mock: ^1.2.1
     react: ^17.0.1
     rollup: ^2.41.5
     rollup-plugin-typescript2: ^0.30.0
@@ -10707,6 +10708,13 @@ fsevents@^1.2.7:
     html-escaper: ^2.0.0
     istanbul-lib-report: ^3.0.0
   checksum: d4ed416e13fe0fc709566439086660ddab58dce9d6a655053c5315715aac8225bc7e9fcae553c2c3d8cc66cd4b59498a50b92d543a4820c5be0e5ee30178cdf0
+  languageName: node
+  linkType: hard
+
+"jest-battery-mock@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "jest-battery-mock@npm:1.2.1"
+  checksum: db967ec6c15303b9efe159cb339c10cdbb796d72ea2065c66c58dcada6a8e81ec37224da3b3c39b09a7cce14e68b40cb5474fed53eeed2d07adbd5e5505d26c6
   languageName: node
   linkType: hard
 
