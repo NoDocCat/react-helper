@@ -28,25 +28,19 @@ export function useBattery(): BatteryState {
 
   useEffect(() => {
     if (!support) return;
-
     let destroy = false;
 
-    navigator.getBattery().then(value => {
+    (async function () {
+      const batteryManager = await navigator.getBattery();
+      const event: Event = { ...new Event("levelchange"), target: batteryManager };
+
       if (destroy) return;
+      setManager(batteryManager);
+      listener(event);
+    })();
 
-      setManager(value);
-      setState({
-        charging: value.charging,
-        chargingTime: value.chargingTime,
-        dischargingTime: value.dischargingTime,
-        level: value.level,
-      });
-    });
-
-    return () => {
-      destroy = true;
-    };
-  }, [support]);
+    return () => (destroy = true) && undefined;
+  }, [listener, support]);
 
   useEffect(() => {
     if (!manager) return;
