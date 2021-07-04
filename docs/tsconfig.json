@@ -1,7 +1,0 @@
-{
-  "extends": "../node_modules/@tsconfig/docusaurus/tsconfig.json",
-  "compilerOptions": {
-    "types": ["node", "../node_modules/@docusaurus/module-type-aliases"]
-  },
-  "include": ["./components", "./docs", "./pages"]
-}
