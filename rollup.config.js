@@ -3,7 +3,7 @@ import pkg from "./package.json";
 
 export default {
   input: "./src/index.ts",
-  output: { file: pkg.module, format: "es", sourcemap: true },
+  output: { file: pkg.main, format: "es", sourcemap: true },
   external: ["react"],
   plugins: [
     typescript({
