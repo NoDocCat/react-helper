@@ -1,32 +1,63 @@
 {
-  "name": "root",
-  "private": true,
-  "workspaces": [
-    "project"
-  ],
+  "name": "@ndct/react-helper",
+  "version": "2.0.0",
+  "description": "React 开发辅助工具集",
+  "main": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
   "scripts": {
-    "start": "yarn workspaces foreach -pi run start",
-    "build": "yarn workspaces foreach run build",
-    "test": "yarn workspaces foreach run test",
+    "build": "shx rm -rf ./dist && rollup -c --failAfterWarnings",
     "lint": "prettier -c -u . && eslint .",
-    "postinstall": "husky install"
+    "test": "jest",
+    "prepare": "husky install"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "react",
+    "react-hooks"
+  ],
+  "author": "NoDocCat <nodoccat@outlook.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NoDocCat/react-helper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NoDocCat/react-helper/issues"
+  },
+  "homepage": "https://github.com/NoDocCat/react-helper#readme",
+  "peerDependencies": {
+    "react": "^17.0.2"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/react-hooks": "^7.0.1",
+    "@types/jest": "^26.0.23",
+    "@types/react": "^17.0.13",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
+    "eslint": "^7.30.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.0",
+    "jest": "^27.0.6",
+    "jest-battery-mock": "^1.2.2",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.2",
+    "rollup": "^2.52.7",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "shx": "^0.3.3",
+    "ts-jest": "^27.0.3",
+    "tslib": "^2.3.0",
+    "typescript": "^4.3.5"
   },
   "lint-staged": {
     "**/*": "prettier -w -u",
-    "*.{js,jsx,ts,tsx}": [
-      "prettier -w -u",
-      "eslint --fix"
-    ]
-  },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.18.0",
-    "@typescript-eslint/parser": "^4.18.0",
-    "eslint": "^7.22.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-react": "^7.22.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "husky": "^5.1.3",
-    "lint-staged": "^10.5.4",
-    "prettier": "^2.2.1"
+    "*.{js,jsx,ts,tsx}": "eslint --fix"
   }
 }
