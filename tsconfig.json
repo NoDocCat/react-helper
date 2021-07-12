@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "declarationDir": "./dist/types",
     "esModuleInterop": true,
     "jsx": "react",
     "lib": ["ESNext", "DOM"],
     "module": "ESNext",
     "moduleResolution": "Node",
+    "rootDir": "./src",
     "noImplicitReturns": true,
     "sourceMap": true,
     "strict": true,

@@ -1,5 +1,6 @@
 import typescript from "rollup-plugin-typescript2";
 import pkg from "./package.json";
+import path from "path";
 
 export default {
   input: "./src/index.ts",
@@ -9,7 +10,11 @@ export default {
     typescript({
       useTsconfigDeclarationDir: true,
       tsconfigOverride: {
-        exclude: ["node_modules", "dist", "**/*.spec.ts", "**/*.spec.tsx"],
+        compilerOptions: {
+          declaration: true,
+          declarationDir: path.dirname(pkg.types),
+        },
+        exclude: ["**/*.spec.ts", "**/*.spec.tsx"],
       },
     }),
   ],
