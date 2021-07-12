@@ -1,84 +1,59 @@
 import { useCallback, useEffect, useState } from "react";
 
-// 按照规范应该有一个 type 属性用来表示网络的连接方式, 但目前还未发现有支持此属性的浏览器
 export interface NetworkState {
-  isSupport: boolean; // 当前环境是否支持网络状态 API
-  downlink: number; // 有效带宽估计值
-  effectiveType: "slow-2g" | "2g" | "3g" | "4g"; // 链接类型
-  rtt: number; // 有效往返时间预估值
-  saveData: boolean; // 用户是否设置了减少数据使用量
+  type: ConnectionType;
+  effectiveType: EffectiveConnectionType;
+  downlinkMax: Megabit;
+  downlink: Megabit;
+  rtt: Millisecond;
+  saveData: boolean;
 }
-
-type NetworkEvent = {
-  target: NetworkInformation;
-  type: "change";
-};
-
-type NetworkInformation = NetworkState & {
-  addEventListener(
-    type: NetworkEvent["type"],
-    listener: (event: NetworkEvent) => void,
-    options: boolean | AddEventListenerOptions
-  ): void;
-
-  removeEventListener(
-    type: NetworkEvent["type"],
-    listener: (event: NetworkEvent) => void,
-    options: EventListenerOptions | boolean
-  ): void;
-};
-
-type NavigatorWithNetwork = Navigator & {
-  connection: NetworkInformation;
-};
 
 /**
  * 使用设备网络状态
  */
 export function useNetwork(): NetworkState {
-  const isSupport = navigator && "connection" in navigator;
-
+  const support = "connection" in navigator;
   const [state, setState] = useState<NetworkState>({
-    isSupport: isSupport,
-    downlink: 0,
+    type: "wifi",
     effectiveType: "4g",
-    rtt: 0,
+    downlinkMax: 10,
+    downlink: 1.45,
+    rtt: 300,
     saveData: false,
   });
 
-  const listener = useCallback(
-    (event: NetworkEvent) => {
-      setState({
-        isSupport: isSupport,
-        downlink: event.target.downlink,
-        effectiveType: event.target.effectiveType,
-        rtt: event.target.rtt,
-        saveData: event.target.saveData,
-      });
-    },
-    [isSupport]
-  );
+  const listener = useCallback<EventListener>(evt => {
+    const target = evt.target as NetworkInformation;
 
-  // 初始化状态
-  useEffect(() => {
-    if (!isSupport) return;
-    listener({
-      type: "change",
-      target: (navigator as NavigatorWithNetwork).connection,
+    setState({
+      type: target.type ?? "wifi",
+      effectiveType: target.effectiveType ?? "4g",
+      downlinkMax: target.downlinkMax ?? 10,
+      downlink: target.downlink ?? 1.45,
+      rtt: target.rtt ?? 300,
+      saveData: target.saveData ?? false,
     });
-  }, [isSupport, listener]);
+  }, []);
 
-  // 注册事件
   useEffect(() => {
-    if (!isSupport) return;
-    const connection = (navigator as NavigatorWithNetwork).connection;
+    if (!support) return;
+    const networkInformation = navigator.connection as NetworkInformation;
+    const event: Event = { ...new Event("change"), target: networkInformation };
 
-    connection.addEventListener("change", listener, false);
+    listener(event);
+  }, [listener, support]);
+
+  useEffect(() => {
+    if (!support) return;
+    const networkInformation = navigator.connection as NetworkInformation;
+
+    networkInformation.addEventListener("change", listener);
 
     return () => {
-      connection.removeEventListener("change", listener, false);
+      networkInformation.removeEventListener("change", listener);
     };
-  }, [isSupport, listener]);
+  }, [listener, support]);
 
   return state;
 }

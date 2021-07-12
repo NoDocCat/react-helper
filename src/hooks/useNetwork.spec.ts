@@ -1,40 +1,49 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { act, renderHook } from "@testing-library/react-hooks";
 import { useNetwork } from "./useNetwork";
+import { NetworkMock } from "jest-network-mock";
 
 describe("hooks/useNetwork", () => {
-  it("not support", () => {
-    // todo: 此处需要寻找一个方法明确隐藏 navigator.connection, 以防止 jsdom 后续更新加入相关 api 模拟导致测试失败
+  afterEach(() => NetworkMock.clean());
+
+  test("API 不支持时返回预设状态", () => {
+    NetworkMock.clean();
     const { result } = renderHook(() => useNetwork());
-    expect(result.current.isSupport).toBeFalsy();
+
+    expect(result.current.type).toBe("wifi");
+    expect(result.current.effectiveType).toBe("4g");
+    expect(result.current.downlinkMax).toBe(10);
+    expect(result.current.downlink).toBe(1.45);
+    expect(result.current.rtt).toBe(300);
+    expect(result.current.saveData).toBe(false);
   });
 
-  it("default state get", () => {
-    // mock
-    const state = {
-      downlink: 5,
-      effectiveType: "4g",
-      rtt: 150,
-      saveData: false,
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-    };
-
-    Object.defineProperty(navigator, "connection", { get: () => state, configurable: true });
-
+  test("初始状态获取", () => {
+    NetworkMock.mock();
+    NetworkMock.dispatch({ type: "cellular", rtt: 600, effectiveType: "slow-2g" });
     const { result } = renderHook(() => useNetwork());
-    expect(result.current.isSupport).toBeTruthy();
-    expect(result.current.downlink).toBe(state.downlink);
-    expect(result.current.effectiveType).toBe(state.effectiveType);
-    expect(result.current.rtt).toBe(state.rtt);
-    expect(result.current.saveData).toBe(state.saveData);
 
-    // clean mock
-    if ("connection" in navigator) {
-      delete navigator["connection"];
-    }
+    expect(result.current.type).toBe("cellular");
+    expect(result.current.effectiveType).toBe("slow-2g");
+    expect(result.current.downlinkMax).toBe(10);
+    expect(result.current.downlink).toBe(1.45);
+    expect(result.current.rtt).toBe(600);
+    expect(result.current.saveData).toBe(false);
   });
 
-  it("event test", () => {
-    // todo: 寻找模拟事件的方法
+  test("变更事件处理", () => {
+    NetworkMock.mock();
+    const { result } = renderHook(() => useNetwork());
+
+    act(() => {
+      NetworkMock.dispatch({ type: "mixed", effectiveType: "slow-2g", downlinkMax: 5 });
+      NetworkMock.dispatch({ downlink: 0.5, rtt: 600, saveData: true });
+    });
+
+    expect(result.current.type).toBe("mixed");
+    expect(result.current.effectiveType).toBe("slow-2g");
+    expect(result.current.downlinkMax).toBe(5);
+    expect(result.current.downlink).toBe(0.5);
+    expect(result.current.rtt).toBe(600);
+    expect(result.current.saveData).toBe(true);
   });
 });

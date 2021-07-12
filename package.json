@@ -47,6 +47,7 @@
     "husky": "^7.0.0",
     "jest": "^27.0.6",
     "jest-battery-mock": "^1.2.2",
+    "jest-network-mock": "^1.2.2",
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.2",
     "rollup": "^2.52.7",
