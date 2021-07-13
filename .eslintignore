@@ -2,3 +2,5 @@
 .idea
 coverage
 dist
+website/.docusaurus
+website/build

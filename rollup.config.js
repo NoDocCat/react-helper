@@ -14,7 +14,7 @@ export default {
           declaration: true,
           declarationDir: path.dirname(pkg.types),
         },
-        exclude: ["**/*.spec.ts", "**/*.spec.tsx"],
+        exclude: ["**/*.spec.ts", "**/*.spec.tsx", "website"],
       },
     }),
   ],
