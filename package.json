@@ -4,10 +4,17 @@
   "description": "React 开发辅助工具集",
   "main": "./dist/index.js",
   "types": "./dist/types/index.d.ts",
+  "workspaces": [
+    "./website"
+  ],
   "scripts": {
+    "start": "run-p watch docs:start",
+    "watch": "shx rm -rf ./dist && rollup -c -w",
     "build": "shx rm -rf ./dist && rollup -c --failAfterWarnings",
     "lint": "prettier -c -u . && eslint .",
     "test": "jest",
+    "docs:start": "npm run start -w website",
+    "docs:build": "npm run build -w website",
     "prepare": "husky install"
   },
   "files": [
@@ -49,6 +56,7 @@
     "jest-battery-mock": "^1.2.2",
     "jest-network-mock": "^1.2.2",
     "lint-staged": "^11.0.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.3.2",
     "rollup": "^2.52.7",
     "rollup-plugin-typescript2": "^0.30.0",
