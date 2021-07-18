@@ -1,0 +1,31 @@
+import { DemoBox } from "../../src/components/DemoBox";
+import UseBatteryDemo from "../../src/demo/UseBatteryDemo";
+import UseBatteryDemoSource from "!!raw-loader!../../src/demo/UseBatteryDemo";
+
+使用设备电池状态
+
+:::info
+此 hook 依赖于非标准 API 且这些 API 随时有可能被移除  
+为了保证兼容性和方便开发, 设计为当不支持 API 时返回一组预设值用于填充
+:::
+
+## Demo
+
+<DemoBox source={UseBatteryDemoSource} type="tsx">
+  <UseBatteryDemo />
+</DemoBox>
+
+## API
+
+```typescript
+const state = useBattery();
+```
+
+### Result
+
+| 名称                  | 说明           | 类型    | 备用预设值 |
+| :-------------------- | :------------- | :------ | :--------- |
+| state.charging        | 是否正在充电   | boolean | true       |
+| state.chargingTime    | 还需多少秒充满 | number  | 0          |
+| state.dischargingTime | 还需多少秒耗尽 | number  | Infinity   |
+| state.level           | 电量等级       | number  | 1          |
