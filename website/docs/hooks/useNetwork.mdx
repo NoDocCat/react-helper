@@ -1,0 +1,37 @@
+import { DemoBox } from "../../src/components/DemoBox";
+import UseNetworkDemo from "../../src/demo/UseNetworkDemo";
+import UseNetworkDemoSource from "!!raw-loader!../../src/demo/UseNetworkDemo";
+
+使用设备网络状态
+
+:::info
+当前不同的浏览器对网络状态 API 的支持各不相同  
+为了保证兼容性和方便开发, 对于不支持的状态将使用预设值进行填充
+:::
+
+## Demo
+
+<DemoBox source={UseNetworkDemoSource} type="tsx">
+  <UseNetworkDemo />
+</DemoBox>
+
+:::tip
+您可以使用开发者工具的 Network 面板修改设备网络状态
+:::
+
+## API
+
+```typescript
+const state = useNetwork();
+```
+
+### Result
+
+| 名称                | 说明         | 类型    | 备用预设值 |
+| :------------------ | :----------- | :------ | :--------- |
+| state.type          | 连接方式     | string  | wifi       |
+| state.effectiveType | 连接类型     | string  | 4g         |
+| state.downlinkMax   | 最大带宽估值 | number  | 10         |
+| state.downlink      | 有效带宽估值 | number  | 1.45       |
+| state.rtt           | 往返时间估值 | number  | 300        |
+| state.saveData      | 节流开关     | boolean | false      |
