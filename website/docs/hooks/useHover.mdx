@@ -1,0 +1,40 @@
+import { DemoBox } from "../../src/components/DemoBox";
+import UseHoverDemo from "../../src/demo/UseHoverDemo";
+import UseHoverDemoSource from "!!raw-loader!../../src/demo/UseHoverDemo";
+import UseHoverDelayDemo from "../../src/demo/UseHoverDelayDemo";
+import UseHoverDelayDemoSource from "!!raw-loader!../../src/demo/UseHoverDelayDemo";
+
+使用元素 hover 状态
+
+## Demo
+
+### 常规使用
+
+<DemoBox source={UseHoverDemoSource} type="tsx">
+  <UseHoverDemo />
+</DemoBox>
+
+### 延时触发
+
+<DemoBox source={UseHoverDelayDemoSource} type="tsx">
+  <UseHoverDelayDemo />
+</DemoBox>
+
+## API
+
+```typescript
+const hover = useHover(ref, 5000);
+```
+
+### Params
+
+| 名称  | 说明           | 类型                    |
+| :---- | :------------- | :---------------------- |
+| ref   | 目标元素       | RefObject<HTMLElement\> |
+| delay | 延时时长(毫秒) | number                  |
+
+### Result
+
+| 名称  | 说明            | 类型    |
+| :---- | :-------------- | :------ |
+| hover | 元素 hover 状态 | boolean |
