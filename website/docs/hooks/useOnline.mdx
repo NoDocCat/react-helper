@@ -1,6 +1,18 @@
+import { DemoBox } from "../../src/components/DemoBox";
+import UseOnlineDemo from "../../src/demo/UseOnlineDemo";
+import UseOnlineDemoSource from "!!raw-loader!../../src/demo/UseOnlineDemo";
+
 使用浏览器在线状态
 
 ## Demo
+
+<DemoBox source={UseOnlineDemoSource} type="tsx">
+  <UseOnlineDemo />
+</DemoBox>
+
+:::note
+可通过开发者工具的网络面板使浏览器离线
+:::
 
 ## API
 
