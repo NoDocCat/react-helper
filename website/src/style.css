@@ -39,3 +39,7 @@ table thead th {
 html[data-theme="dark"] table thead th {
   background: transparent;
 }
+
+button + button {
+  margin-left: 8px;
+}

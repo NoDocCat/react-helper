@@ -1,0 +1,30 @@
+import { DemoBox } from "../../src/components/DemoBox";
+import UseBooleanDemo from "../../src/demo/UseBooleanDemo";
+import UseBooleanDemoSource from "!!raw-loader!../../src/demo/UseBooleanDemo";
+
+使用布尔状态
+
+## Demo
+
+<DemoBox source={UseBooleanDemoSource} type="tsx">
+  <UseBooleanDemo />
+</DemoBox>
+
+## API
+
+```typescript
+const [state, dispatch] = useBoolean(false);
+```
+
+### Params
+
+| 名称      | 说明       | 类型    |
+| :-------- | :--------- | :------ |
+| initState | 初始状态值 | boolean |
+
+### Result
+
+| 名称     | 说明                                                           | 类型                      |
+| :------- | :------------------------------------------------------------- | :------------------------ |
+| state    | 当前状态值                                                     | boolean                   |
+| dispatch | 状态更改函数, 默认切换布尔值状态, 也可以传入一个参数作为新状态 | (value?: boolean) => void |
