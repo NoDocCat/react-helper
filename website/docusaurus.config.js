@@ -27,6 +27,7 @@ module.exports = {
     },
     prism: { theme: lightCodeTheme, darkTheme: darkCodeTheme },
   },
+  plugins: [require.resolve("./plugins/library-loader")],
   presets: [
     [
       "@docusaurus/preset-classic",
